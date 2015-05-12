@@ -22,7 +22,7 @@ module.exports = {
     };
 
     return function (dims) {
-      var stage = new PIXI.Stage(0x66FF99);
+      var stage = new PIXI.Container();
       var renderer = PIXI.autoDetectRenderer(dims.usableWidth, dims.usableHeight);
       $('#' + element()).append(renderer.view);
 
