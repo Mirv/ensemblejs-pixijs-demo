@@ -38,7 +38,7 @@ gulp.task('delete-gen-code', function (cb) {
 });
 gulp.task('clean', ['delete-gen-css', 'delete-gen-code']);
 
-gulp.task('test', ['clean'], function (cb) {
+gulp.task('test', function (cb) {
     gulp.src(paths.tests)
         .pipe(mocha({reporter: 'spec'}))
         .on('end', cb);
@@ -92,5 +92,5 @@ gulp.task('start-server', function (cb) {
     });
 });
 
-gulp.task('default', ['test', 'build']);
+gulp.task('default', ['clean', 'test', 'build']);
 gulp.task('local', ['build-fast', 'start-server']);

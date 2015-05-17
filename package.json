@@ -7,9 +7,9 @@
     "npm": "latest"
   },
   "dependencies": {
-    "ensemblejs": "^1.0.0",
-    "ensemblejs-client": "^1.0.0",
-    "pixi.js": "^3.0.3",
+    "ensemblejs": "^2.1.0",
+    "ensemblejs-client": "^1.1.0",
+    "pixi.js": "^3.0.5",
     "zepto-browserify": "^1.1.6-1"
   },
   "devDependencies": {

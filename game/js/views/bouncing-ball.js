@@ -17,8 +17,20 @@ module.exports = {
       }
     };
 
+    var updateColour = function(currentColour, priorColour, ball) {
+      if (currentColour === undefined) {
+        ball.tint = priorColour;
+      } else {
+        ball.tint = currentColour;
+      }
+    };
+
     var theBallPosition = function (state) {
       return state['bouncing-ball-game'].ball.position;
+    };
+
+    var theBallColour = function (state) {
+      return state['bouncing-ball-game'].ball.colour;
     };
 
     return function (dims) {
@@ -27,12 +39,13 @@ module.exports = {
       $('#' + element()).append(renderer.view);
 
       var ball = new PIXI.Graphics();
-      ball.beginFill(0x999999);
+      ball.beginFill(0xffffff);
       ball.drawCircle(0,0,25);
 
       stage.addChild(ball);
 
       tracker().onChangeOf(theBallPosition, updateBall, ball);
+      tracker().onChangeOf(theBallColour, updateColour, ball);
 
       define()('OnEachFrame', function () {
         return function () {
