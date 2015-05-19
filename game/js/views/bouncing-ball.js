@@ -7,21 +7,16 @@ module.exports = {
   type: 'View',
   deps: ['Element', 'StateTracker', 'DefinePlugin'],
   func: function (element, tracker, define) {
-    var updateBall = function(currentPosition, priorPosition, ball) {
-      if (currentPosition === undefined) {
-        ball.position.x = priorPosition.x;
-        ball.position.y = priorPosition.y;
-      } else {
-        ball.position.x = currentPosition.x;
-        ball.position.y = currentPosition.y;
-      }
+    var updateBall = function(current, prior, ball) {
+      ball.position.x = current.x;
+      ball.position.y = current.y;
     };
 
-    var updateColour = function(currentColour, priorColour, ball) {
-      if (currentColour === undefined) {
-        ball.tint = priorColour;
+    var updateColour = function(current, prior, ball) {
+      if (current === 'happy') {
+        ball.tint = 0xffffff;
       } else {
-        ball.tint = currentColour;
+        ball.tint = 0xff0000;
       }
     };
 
@@ -29,8 +24,8 @@ module.exports = {
       return state['bouncing-ball-game'].ball.position;
     };
 
-    var theBallColour = function (state) {
-      return state['bouncing-ball-game'].ball.colour;
+    var theBallDemeanour = function (state) {
+      return state['bouncing-ball-game'].ball.demeanour;
     };
 
     return function (dims) {
@@ -45,16 +40,12 @@ module.exports = {
       stage.addChild(ball);
 
       tracker().onChangeOf(theBallPosition, updateBall, ball);
-      tracker().onChangeOf(theBallColour, updateColour, ball);
+      tracker().onChangeOf(theBallDemeanour, updateColour, ball);
 
       define()('OnEachFrame', function () {
         return function () {
           renderer.render(stage);
         };
-      });
-
-      define()('OnResize', function () {
-        return function () {};
       });
     };
   }
