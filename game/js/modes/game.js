@@ -2,32 +2,35 @@
 
 module.exports = {
   type: 'BouncingBallGame',
-  deps: ['DefinePlugin', 'BouncingBallGame-Behaviour'],
-  func: function(define, behaviour) {
+  deps: ['DefinePlugin', 'BouncingBallGame-Behaviour', 'NewState'],
+  func: function(define, behaviour, newState) {
     return function() {
+
       define()('StateSeed', function () {
-        return {
-          'bouncing-ball-game': {
-            ball: {
-              position: { x: 100, y: 50 },
-              speed: { x: 100, y: 50 },
-              radius: 25,
-              demeanour: 'happy'
-            },
-            board: {
-              width: 500,
-              height: 500
-            }
+        var state = {
+          ball: {
+            position: { x: 100, y: 50 },
+            speed: { x: 100, y: 50 },
+            radius: 25,
+            demeanour: 'happy'
+          },
+          board: {
+            width: 500,
+            height: 500
           }
         };
+
+        return newState().create('bouncing-ball-game', state);
       });
 
       define()('ServerSideUpdate', ['StateAccess'], function(state) {
-        return function (delta) {
-          var pos = state().get('bouncing-ball-game')('ball')('position');
-          var radius = state().get('bouncing-ball-game')('ball')('radius');
-          var speed = state().get('bouncing-ball-game')('ball')('speed');
-          var board = state().get('bouncing-ball-game')('board');
+        return function (gameId, delta) {
+          var ball = state().for(gameId, 'bouncing-ball-game').get('ball');
+          var board = state().for(gameId, 'bouncing-ball-game').get('board');
+
+          var pos = ball('position');
+          var radius = ball('radius');
+          var speed = ball('speed');
 
           var newPos = {
             x: pos('x') + speed('x') * delta,
@@ -46,14 +49,12 @@ module.exports = {
             newSpeed.y = speed('y') * -1;
           }
 
-          return {
-            'bouncing-ball-game': {
-              ball: {
-                position: newPos,
-                speed: newSpeed
-              }
+          return newState().create('bouncing-ball-game', {
+            ball: {
+              position: newPos,
+              speed: newSpeed
             }
-          };
+          });
         };
       });
 

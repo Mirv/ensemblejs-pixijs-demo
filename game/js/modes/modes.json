@@ -1,0 +1,11 @@
+{
+  "game": {
+    "state": ["BouncingBallGame-StateSeed"],
+    "maps": {
+      "action": ["BouncingBallGame-ActionMap"]
+    },
+    "events": {
+      "ServerSideUpdate": ["BouncingBallGame-BounceBall"]
+    }
+  }
+}

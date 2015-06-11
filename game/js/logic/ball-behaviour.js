@@ -2,20 +2,20 @@
 
 module.exports = {
   type: 'BouncingBallGame-Behaviour',
-  deps: ['StateAccess'],
-  func: function (state) {
+  deps: ['StateAccess', 'NewState'],
+  func: function (state, newState) {
     return {
-      changeColour: function () {
-        var current = state().get('bouncing-ball-game')('ball')('demeanour');
+      changeColour: function (data) {
+        var ball = state().for(data.gameId, 'bouncing-ball-game').get('ball');
+
+        var current = ball('demeanour');
         var newDemeanour = (current === 'happy' ? 'angry' : 'happy');
 
-        return {
-          'bouncing-ball-game': {
-            ball: {
-              demeanour: newDemeanour
-            }
+        return newState().create('bouncing-ball-game', {
+          ball: {
+            demeanour: newDemeanour
           }
-        };
+        });
       }
     };
   }
