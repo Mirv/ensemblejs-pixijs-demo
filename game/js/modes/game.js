@@ -2,25 +2,25 @@
 
 module.exports = {
   type: 'BouncingBallGame',
-  deps: ['DefinePlugin', 'BouncingBallGame-Behaviour', 'NewState'],
-  func: function(define, behaviour, newState) {
+  deps: ['DefinePlugin', 'BouncingBallGame-Behaviour'],
+  func: function(define, behaviour) {
     return function() {
 
       define()('StateSeed', function () {
-        var state = {
-          ball: {
-            position: { x: 100, y: 50 },
-            speed: { x: 100, y: 50 },
-            radius: 25,
-            demeanour: 'happy'
-          },
-          board: {
-            width: 500,
-            height: 500
+        return {
+          'bouncing-ball-game': {
+            ball: {
+              position: { x: 100, y: 50 },
+              speed: { x: 100, y: 50 },
+              radius: 25,
+              demeanour: 'happy'
+            },
+            board: {
+              width: 500,
+              height: 500
+            }
           }
         };
-
-        return newState().create('bouncing-ball-game', state);
       });
 
       define()('ServerSideUpdate', ['StateAccess'], function(state) {
@@ -49,12 +49,14 @@ module.exports = {
             newSpeed.y = speed('y') * -1;
           }
 
-          return newState().create('bouncing-ball-game', {
-            ball: {
-              position: newPos,
-              speed: newSpeed
+          return {
+            'bouncing-ball-game': {
+              ball: {
+                position: newPos,
+                speed: newSpeed
+              }
             }
-          });
+          };
         };
       });
 
