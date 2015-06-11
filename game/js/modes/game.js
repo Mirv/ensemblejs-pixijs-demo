@@ -23,10 +23,10 @@ module.exports = {
         };
       });
 
-      define()('ServerSideUpdate', ['StateAccess'], function(state) {
-        return function (gameId, delta) {
-          var ball = state().for(gameId, 'bouncing-ball-game').get('ball');
-          var board = state().for(gameId, 'bouncing-ball-game').get('board');
+      define()('ServerSideUpdate', [], function() {
+        return function (state, delta) {
+          var ball = state.for('bouncing-ball-game').get('ball');
+          var board = state.for('bouncing-ball-game').get('board');
 
           var pos = ball('position');
           var radius = ball('radius');
