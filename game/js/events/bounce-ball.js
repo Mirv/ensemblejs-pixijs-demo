@@ -3,7 +3,7 @@
 module.exports = {
   type: 'ServerSideUpdate',
   func: function() {
-    return ['*', function (state, delta) {
+    return function (state, delta) {
       var ball = state.for('bouncing-ball-game').get('ball');
       var board = state.for('bouncing-ball-game').get('board');
 
@@ -36,6 +36,6 @@ module.exports = {
           }
         }
       };
-    }];
+    };
   }
 };

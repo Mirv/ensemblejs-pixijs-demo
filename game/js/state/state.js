@@ -3,7 +3,7 @@
 module.exports = {
   type: 'StateSeed',
   func: function () {
-    return ['*', {
+    return {
       'bouncing-ball-game': {
         ball: {
           position: { x: 100, y: 50 },
@@ -16,6 +16,6 @@ module.exports = {
           height: 500
         }
       }
-    }];
+    };
   }
 };
