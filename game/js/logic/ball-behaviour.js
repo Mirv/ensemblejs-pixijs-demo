@@ -2,11 +2,12 @@
 
 module.exports = {
   type: 'BouncingBallGame-Behaviour',
-  deps: ['StateAccess'],
-  func: function (state) {
+  func: function () {
     return {
-      changeColour: function () {
-        var current = state().get('bouncing-ball-game')('ball')('demeanour');
+      changeColour: function (state) {
+        var ball = state.for('bouncing-ball-game').get('ball');
+
+        var current = ball('demeanour');
         var newDemeanour = (current === 'happy' ? 'angry' : 'happy');
 
         return {
