@@ -5,8 +5,8 @@ var $ = require('zepto-browserify').$;
 
 module.exports = {
   type: 'View',
-  deps: ['Element', 'StateTracker', 'DefinePlugin'],
-  func: function (element, tracker, define) {
+  deps: ['Element', 'StateTracker', 'DefinePlugin', 'CurrentState'],
+  func: function (element, tracker, define, currentState) {
     var updateBall = function(current, prior, ball) {
       ball.position.x = current.x;
       ball.position.y = current.y;
@@ -46,7 +46,7 @@ module.exports = {
     var createBall = function () {
       var ball = new PIXI.Graphics();
       ball.beginFill(0xffffff);
-      ball.drawCircle(0, 0, tracker().get(theBallRadius));
+      ball.drawCircle(0, 0, currentState().get(theBallRadius));
 
       return ball;
     };
@@ -54,7 +54,7 @@ module.exports = {
     var createBoard = function () {
       var board = new PIXI.Graphics();
       board.beginFill(0x55ff55);
-      board.drawRect(0, 0, tracker().get(theBoardDimensions).width, tracker().get(theBoardDimensions).height);
+      board.drawRect(0, 0, currentState().get(theBoardDimensions).width, currentState().get(theBoardDimensions).height);
 
       return board;
     };
@@ -65,7 +65,7 @@ module.exports = {
       var renderer = PIXI.autoDetectRenderer(dims.usableWidth, dims.usableHeight);
       $('#' + element()).append(renderer.view);
 
-      offset = calculateOffset(tracker().get(theBoardDimensions), dims);
+      offset = calculateOffset(currentState().get(theBoardDimensions), dims);
       stage.position.x = offset.x;
       stage.position.y = offset.y;
 
