@@ -1,0 +1,11 @@
+{
+  "logging": {
+    "logLevel": "warn"
+  },
+  "measure": {
+    "timers": [
+      "ensemblejs:RenderLoop:run",
+      "ensemblejs:On:*"
+    ]
+  }
+}
