@@ -5,8 +5,8 @@ var $ = require('zepto-browserify').$;
 
 module.exports = {
   type: 'View',
-  deps: ['Element', 'StateTracker', 'DefinePlugin', 'CurrentState', 'CurrentServerState'],
-  func: function View (element, tracker, define, currentState, currentServerState) {
+  deps: ['Config', 'StateTracker', 'DefinePlugin', 'CurrentState', 'CurrentServerState'],
+  func: function View (config, tracker, define, currentState, currentServerState) {
 
     function updateBall (current, prior, ball) {
       ball.position.x = current.x;
@@ -72,7 +72,7 @@ module.exports = {
     return function setup (dims) {
       var stage = new PIXI.Container();
       var renderer = PIXI.autoDetectRenderer(dims.usableWidth, dims.usableHeight);
-      $('#' + element()).append(renderer.view);
+      $('#' + config().client.element).append(renderer.view);
 
       offset = calculateOffset(currentState().get(theBoardDimensions), dims);
       stage.position.x = offset.x;
@@ -87,7 +87,7 @@ module.exports = {
       tracker().onChangeOf(theBallPosition, updateBall, clientBall);
       tracker().onChangeOf(theBallDemeanour, updateColour, clientBall);
 
-      define()('OnRenderFrame', function () {
+      define()('OnRenderFrame', function OnRenderFrame () {
         return function renderScene () {
           var position = currentServerState().get(theBallPosition);
           var demeanour = currentServerState().get(theBallDemeanour);

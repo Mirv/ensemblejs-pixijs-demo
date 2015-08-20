@@ -1,6 +1,7 @@
 {
+  "aspectRatio": 1,
   "logging": {
-    "logLevel": "warn"
+    "logLevel": "info"
   },
   "measure": {
     "timers": [
