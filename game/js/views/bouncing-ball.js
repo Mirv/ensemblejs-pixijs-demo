@@ -1,12 +1,12 @@
 'use strict';
 
 var PIXI = require('pixi.js');
-var $ = require('zepto-browserify').$;
 
+//jshint maxparams:false
 module.exports = {
-  type: 'View',
-  deps: ['Config', 'StateTracker', 'DefinePlugin', 'CurrentState', 'CurrentServerState'],
-  func: function View (config, tracker, define, currentState, currentServerState) {
+  type: 'OnReady',
+  deps: ['Config', 'StateTracker', 'DefinePlugin', 'CurrentState', 'CurrentServerState', '$'],
+  func: function View (config, tracker, define, currentState, currentServerState, $) {
 
     function updateBall (current, prior, ball) {
       ball.position.x = current.x;
@@ -72,7 +72,7 @@ module.exports = {
     return function setup (dims) {
       var stage = new PIXI.Container();
       var renderer = PIXI.autoDetectRenderer(dims.usableWidth, dims.usableHeight);
-      $('#' + config().client.element).append(renderer.view);
+      $()('#' + config().client.element).append(renderer.view);
 
       offset = calculateOffset(currentState().get(theBoardDimensions), dims);
       stage.position.x = offset.x;

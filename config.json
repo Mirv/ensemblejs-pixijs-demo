@@ -3,6 +3,9 @@
   "logging": {
     "logLevel": "info"
   },
+  "debug": {
+    "network": true
+  },
   "measure": {
     "timers": [
       "ensemblejs:RenderLoop:run",

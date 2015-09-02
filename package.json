@@ -7,7 +7,7 @@
     "npm": "latest"
   },
   "dependencies": {
-    "ensemblejs": "file:///Users/distributedlife/projects/ensemblejs",
+    "ensemblejs": "^5.0.0-beta",
     "pixi.js": "^3.0.7"
   },
   "devDependencies": {
@@ -44,7 +44,8 @@
           "pretty": false
         }
       ],
-      "require-globify"
+      "require-globify",
+      "requirish"
     ]
   },
   "browserify-shim": {
