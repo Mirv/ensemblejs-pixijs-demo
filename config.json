@@ -1,15 +1,5 @@
 {
-  "aspectRatio": 1,
-  "logging": {
-    "logLevel": "info"
-  },
-  "debug": {
-    "network": true
-  },
-  "measure": {
-    "timers": [
-      "ensemblejs:RenderLoop:run",
-      "ensemblejs:On:*"
-    ]
+  "client": {
+    "aspectRatio": 1
   }
 }
