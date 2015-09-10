@@ -62,7 +62,7 @@ module.exports = {
 
     function createBoard () {
       var board = new PIXI.Graphics();
-      board.beginFill(0x55ff55);
+      board.beginFill(0x807A74);
       board.drawRect(0, 0, currentState().get(theBoardDimensions).width, currentState().get(theBoardDimensions).height);
 
       return board;
