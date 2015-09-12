@@ -4,7 +4,7 @@ var PIXI = require('pixi.js');
 
 //jshint maxparams:false
 module.exports = {
-  type: 'OnReady',
+  type: 'OnClientReady',
   deps: ['Config', 'StateTracker', 'DefinePlugin', 'CurrentState', 'CurrentServerState', '$'],
   func: function View (config, tracker, define, currentState, currentServerState, $) {
 
@@ -17,7 +17,7 @@ module.exports = {
       if (current === 'happy') {
         ball.tint = 0xffffff;
       } else {
-        ball.tint = 0xff0000;
+        ball.tint = 0x0000ff;
       }
     }
 
@@ -88,7 +88,7 @@ module.exports = {
       tracker().onChangeOf(theBallDemeanour, updateColour, clientBall);
 
       define()('OnRenderFrame', function OnRenderFrame () {
-        return function renderScene () {
+        return function updateServerBall () {
           var position = currentServerState().get(theBallPosition);
           var demeanour = currentServerState().get(theBallDemeanour);
 
@@ -98,7 +98,11 @@ module.exports = {
           } else {
             serverBall.tint = 0xff0000;
           }
+        };
+      });
 
+      define()('OnRenderFrame', function OnRenderFrame () {
+        return function renderScene () {
           renderer.render(stage);
         };
       });
