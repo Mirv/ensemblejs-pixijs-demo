@@ -7,7 +7,7 @@
     "npm": "latest"
   },
   "dependencies": {
-    "ensemblejs": "^5.0.0",
+    "ensemblejs": "^5.1.0",
     "pixi.js": "^3.0.7"
   },
   "devDependencies": {
