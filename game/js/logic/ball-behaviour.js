@@ -4,19 +4,12 @@ module.exports = {
   type: 'BouncingBallGame-Behaviour',
   func: function () {
     return {
-      changeColour: function (state) {
-        var ball = state.for('bouncing-ball-game').get('ball');
+      changeColour: function changeColour (state) {
+        var demeanour = state.get('demo.ball.demeanour');
 
-        var current = ball('demeanour');
-        var newDemeanour = (current === 'happy' ? 'angry' : 'happy');
-
-        return {
-          'bouncing-ball-game': {
-            ball: {
-              demeanour: newDemeanour
-            }
-          }
-        };
+        return [
+          'demo.ball.demeanour', demeanour === 'happy' ? 'angry' : 'happy'
+        ];
       }
     };
   }

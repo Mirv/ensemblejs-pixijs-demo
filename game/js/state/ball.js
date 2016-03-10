@@ -2,18 +2,19 @@
 
 module.exports = {
   type: 'StateSeed',
-  func: function () {
+  deps: ['Config'],
+  func: function (config) {
     return {
-      'bouncing-ball-game': {
+      demo: {
         ball: {
           position: { x: 100, y: 50 },
-          speed: { x: 100, y: 50 },
+          velocity: { x: 150, y: -100 },
           radius: 25,
           demeanour: 'happy'
         },
         board: {
-          width: 500,
-          height: 500
+          width: config().demo.board.width,
+          height: config().demo.board.height,
         }
       }
     };

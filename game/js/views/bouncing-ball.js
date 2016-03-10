@@ -14,27 +14,23 @@ module.exports = {
     }
 
     function updateColour (current, prior, ball) {
-      if (current === 'happy') {
-        ball.tint = 0xffffff;
-      } else {
-        ball.tint = 0x0000ff;
-      }
+      ball.tint = current === 'happy' ? 0xffffff : 0x0000ff;
     }
 
     function theBallPosition (state) {
-      return state['bouncing-ball-game'].ball.position;
+      return state.demo.ball.position;
     }
 
     function theBallDemeanour (state) {
-      return state['bouncing-ball-game'].ball.demeanour;
+      return state.demo.ball.demeanour;
     }
 
     function theBallRadius (state) {
-      return state['bouncing-ball-game'].ball.radius;
+      return state.demo.ball.radius;
     }
 
     function theBoardDimensions (state) {
-      return state['bouncing-ball-game'].board;
+      return state.demo.board;
     }
 
     function calculateOffset (boardDimensions, screenDimensions) {

@@ -1,5 +1,11 @@
 {
   "client": {
     "aspectRatio": 1
+  },
+  "demo": {
+    "board": {
+      "width": 500,
+      "height": 500
+    }
   }
 }
