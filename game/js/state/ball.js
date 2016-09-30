@@ -7,6 +7,7 @@ module.exports = {
     return {
       demo: {
         ball: {
+          proxy: { x: 100, y: 50 },
           position: { x: 100, y: 50 },
           velocity: { x: 150, y: -100 },
           radius: 25,

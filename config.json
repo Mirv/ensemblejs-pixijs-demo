@@ -2,10 +2,22 @@
   "client": {
     "aspectRatio": 1
   },
+  "server": {
+    "pushUpdateFrequenc2y": 10000
+  },
   "demo": {
     "board": {
       "width": 500,
       "height": 500
     }
+  },
+  "logging": {
+    "logLevel": "debug"
+  },
+  "debug": {
+    "develop": true
+  },
+  "ensemble": {
+    "pause": "never"
   }
 }

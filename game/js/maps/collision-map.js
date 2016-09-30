@@ -1,24 +1,26 @@
 'use strict';
 
-function bounceBallX (delta, state) {
-  return [
-    'demo.ball.velocity.x', state.get('demo.ball.velocity.x') * -1
-  ];
-}
+import { unwrap } from 'ok-selector';
+import moment from 'moment';
 
-function bounceBallY (delta, state) {
-  return [
-    'demo.ball.velocity.y', state.get('demo.ball.velocity.y') * -1
-  ];
-}
+const reverse = (current) => -current;
+const log = (delta, state) => {
+  console.log('delta', delta)
+  console.log('state', unwrap(state, 'demo.ball.proxy'));
+  console.log('BOUNCE', moment().valueOf())
+};
+const bounceBallX = () => ['demo.ball.velocity.x', reverse];
+const bounceBallY = () => ['demo.ball.velocity.y', reverse];
+
+const resetProxy = (delta, state) => ['demo.ball.proxy', unwrap(state, 'demo.ball.position')];
 
 module.exports = {
   type: 'CollisionMap',
   func: function () {
     return {
       'ball': [
-        { and: ['top-walls'], start: bounceBallY },
-        { and: ['side-walls'], start: bounceBallX }
+        { and: ['top-walls'], start: [log, bounceBallY, resetProxy] },
+        { and: ['side-walls'], start: [log, bounceBallX, resetProxy] }
       ]
     };
   }

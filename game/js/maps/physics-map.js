@@ -1,11 +1,21 @@
 'use strict';
 
+import read, { unwrap } from 'ok-selector';
+
+function applyCollisionProxy (ball) {
+  return {
+    position: unwrap(ball, 'proxy'),
+    velocity: unwrap(ball, 'velocity'),
+    radius: read(ball, 'radius')
+  };
+}
+
 module.exports = {
   type: 'PhysicsMap',
   deps: ['Config'],
   func: function (config) {
     return {
-      'ball': ['demo.ball'],
+      'ball': [{sourceKey: 'demo.ball', via: applyCollisionProxy}],
       'top-walls': [
         {
           'position': {'x': -100, 'y': -100},
