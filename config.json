@@ -2,9 +2,6 @@
   "client": {
     "aspectRatio": 1
   },
-  "server": {
-    "pushUpdateFrequenc2y": 10000
-  },
   "demo": {
     "board": {
       "width": 500,

@@ -10,8 +10,8 @@ module.exports = {
       const velocity = unwrap(state, 'demo.ball.velocity');
 
       const nextPosition = {
-        x: position.x + velocity.x * delta / 500,
-        y: position.y + velocity.y * delta / 500
+        x: position.x + velocity.x * delta / 1000,
+        y: position.y + velocity.y * delta / 1000
       };
 
       return [
